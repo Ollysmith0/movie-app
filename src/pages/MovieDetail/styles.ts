@@ -28,10 +28,8 @@ export const Container = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    -moz-transform: translateX(-50%) translateY(-50%);
-    -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-    z-index: 2;
+    z-index: 9999;
   }
   #left {
     width: 50%;
@@ -50,7 +48,6 @@ export const Container = styled.div`
     padding-top: 15px;
     padding-left: 16px;
     font-size: 14px;
-    /*   font-family: 'Merriweather Sans', sans-serif; */
     font-family: 'Exo', sans-serif;
 
     div {
@@ -130,6 +127,7 @@ export const Container = styled.div`
       color: white;
       font-size: 18px;
       font-weight: bolder;
+      text-decoration: none;
 
       &:hover {
         color: #1abc9c;

@@ -32,9 +32,9 @@ export function MovieDetail({ movieDetail }: IMovieDetailProps) {
         <div id="left">
           <h1>{title}</h1>
           <div id="info">
+            <div>Adult: {(adult ? 'true' : 'false') || <Skeleton />}</div>
             <div>Original Language: {original_language || <Skeleton />}</div>
             <div>Release Date: {release_date || <Skeleton />}</div>
-            <div>Adult: {(adult ? 'true' : 'false') || <Skeleton />}</div>
             <div>IMDB: {vote_average || <Skeleton />}</div>
             <div>IMDB Count: {vote_count || <Skeleton />}</div>
           </div>

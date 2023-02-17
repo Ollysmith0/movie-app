@@ -29,7 +29,6 @@ export const Button = styled.button`
     text-rendering: geometricprecision;
     text-transform: none;
     user-select: none;
-    -webkit-user-select: none;
     touch-action: manipulation;
     vertical-align: middle;
 

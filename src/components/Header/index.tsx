@@ -1,10 +1,10 @@
-import './styles.scss';
+import { Container } from './styles';
 
 export function Header() {
   return (
-    <div className="header">
+    <Container>
       <h1>Movie App</h1>
-    </div>
+    </Container>
   );
 }
 

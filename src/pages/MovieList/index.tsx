@@ -5,11 +5,11 @@ import { Autoplay, Pagination, A11y } from 'swiper';
 
 import movieAPi from 'axios-client/movieApi';
 import { Movie } from 'models/movie';
-import { Card, Footer, Header } from 'components';
+import { Card, Footer, Header, SearchBar } from 'components';
+import { Container } from './styles';
 
 import 'swiper/css';
 import 'swiper/css/pagination';
-import './styles.scss';
 
 interface MovieListProps {
   handleMovieDetail: (value: Movie) => void;
@@ -24,6 +24,30 @@ export function MovieList({ handleMovieDetail }: MovieListProps) {
     setFilter(value);
   };
 
+  const handleSearchMovie = (value: string) => {
+    if (!value) {
+      movieAPi
+        .get(`${filter}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+        .then((res: any) => setMovies(res.results))
+        .catch((err) => {
+          console.log(err);
+          navigate('/NotFound');
+        });
+    }
+    const newMovieList = [...movies].filter((movie: Movie) => movie.title.includes(value));
+    if (!newMovieList.length) {
+      movieAPi
+        .get(`${filter}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
+        .then((res: any) => setMovies(res.results))
+        .catch((err) => {
+          console.log(err);
+          navigate('/NotFound');
+        });
+    } else {
+      setMovies(newMovieList);
+    }
+  };
+
   useEffect(() => {
     movieAPi
       .get(`${filter}?api_key=${process.env.REACT_APP_API_KEY}&language=en-US&page=1`)
@@ -35,8 +59,9 @@ export function MovieList({ handleMovieDetail }: MovieListProps) {
   }, [filter, navigate]);
 
   return (
-    <>
+    <Container>
       <Header />
+      <SearchBar handleSearchMovie={handleSearchMovie} />
       <Swiper
         // install Swiper modules
         modules={[Autoplay, Pagination, A11y]}
@@ -78,6 +103,6 @@ export function MovieList({ handleMovieDetail }: MovieListProps) {
         ))}
       </Swiper>
       <Footer handleFilter={handleFilter} />
-    </>
+    </Container>
   );
 }
